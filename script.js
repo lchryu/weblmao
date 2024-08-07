@@ -5,7 +5,9 @@ function sleep(ms) {
 async function typeLyric(text, delay) {
     const lyricsDiv = document.getElementById('lyrics');
     for (let i = 0; i < text.length; i++) {
-        lyricsDiv.innerHTML += text[i];
+        const span = document.createElement('span');
+        span.innerText = text[i];
+        lyricsDiv.appendChild(span);
         await sleep(delay);
     }
     lyricsDiv.innerHTML += '<br>';
@@ -19,19 +21,22 @@ async function main() {
     const lyric5 = "But I love you so (please let me go)";
     const lyric6 = "I love you so (please let me go)";
     const lyric8 = "I love you sooooooo";
-    
+
     await typeLyric(lyric1, 135);
     await typeLyric(lyric2, 100);
     await typeLyric(lyric3, 110);
     
     const lyricsDiv = document.getElementById('lyrics');
     for (let i = 0; i < lyric4.length; i++) {
-        lyricsDiv.innerHTML += lyric4[i];
+        const span = document.createElement('span');
+        span.innerText = lyric4[i];
         if (i > 0 && lyric4[i - 1] === 's' && lyric4[i] === 'o') await sleep(300);
+        if (lyric4[i] === 'fool') span.classList.add('highlight');
+        lyricsDiv.appendChild(span);
         await sleep(110);
     }
     lyricsDiv.innerHTML += '<br>';
-    
+
     await sleep(1700);
     await typeLyric(lyric5, 150);
     await sleep(500);
